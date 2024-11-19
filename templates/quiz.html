@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <script>
+        let questions = JSON.parse('{{ questions|tojson }}');
+        let stydents = JSON.parse('{{ students|tojson }}');
+    </script>
+</head>
+<body>
+    <h1>Quiz</h1>
+
+    <!-- Seleção de aluno -->
+    <label for="student-select">Selecione o aluno:</label>
+    <select id="student-select">
+        <option value="">Selecione</option>
+        {% for student in students %}
+            <option value="{{ student['id'] }}">{{ student['name'] }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Container das perguntas -->
+    <div id="quiz-container"></div>
+
+    <script>
+        // Lógica para exibir perguntas
+        const quizContainer = document.getElementById('quiz-container');
+        const studentSelect = document.getElementById('student-select');
+        let currentQuestionIndex = 0;
+
+        function renderQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                quizContainer.innerHTML = "<p>Fim do quiz!</p>";
+                return;
+            }
+
+            const question = questions[currentQuestionIndex];
+            quizContainer.innerHTML = `
+                <h2>${question.question}</h2>
+                ${[...question.incorrect_answers, question.correct_option].sort(() => Math.random() - 0.5).map(option => `
+                    <button onclick="submitAnswer('${option}')">${option}</button>
+                `).join('')}
+            `;
+        }
+
+        async function submitAnswer(selectedOption) {
+            const studentId = studentSelect.value;
+            if (!studentId) {
+                alert("Selecione um aluno antes de responder!");
+                return;
+            }
+
+            const question = questions[currentQuestionIndex];
+            const response = await fetch('/submit-answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    student_id: studentId,
+                    question_id: question.id,
+                    selected_option: selectedOption,
+                }),
+            });
+
+            const result = await response.json();
+            alert(result.message || (result.correct ? "Você acertou!" : "Você errou!"));
+            currentQuestionIndex++;
+            renderQuestion();
+        }
+
+        // Inicializar o quiz
+        renderQuestion();
+    </script>
+</body>
+</html>

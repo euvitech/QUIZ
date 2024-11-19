@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Alunos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Alunos</h1>
+        
+        <!-- Formulário para registrar aluno -->
+        <form id="register-form">
+            <input type="text" id="name" placeholder="Nome do aluno" required>
+            <input type="email" id="email" placeholder="Email do aluno" required>
+            <button type="submit">Registrar</button>
+        </form>
+
+        <!-- Botão para remover um aluno específico -->
+        <input type="number" id="student-id" placeholder="ID do aluno para remover">
+        <button id="remove-student-btn">Remover Aluno</button>
+
+        <!-- Botão para remover todos os alunos -->
+        <button id="remove-all-btn">Remover Todos os Alunos</button>
+
+        <div id="message"></div>  <!-- Mensagens de sucesso ou erro -->
+
+        <!-- Tabela para exibir os alunos -->
+        <h2>Alunos Registrados</h2>
+        <table id="students-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os alunos serão inseridos aqui dinamicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Função para registrar um aluno
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nameStudent = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            fetch('/register-student', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: nameStudent,
+                    email: email
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('message').innerText = data.message || 'Aluno registrado com sucesso!';
+                loadStudents();  // Atualiza a lista de alunos
+            })
+            .catch(error => {
+                document.getElementById('message').innerText = 'Erro ao registrar aluno!';
+                console.error('Error:', error);
+            });
+        });
+
+        // Função para remover um aluno específico
+        document.getElementById('remove-student-btn').addEventListener('click', function() {
+            const studentId = document.getElementById('student-id').value;
+
+            fetch(`/remove-student/${studentId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('message').innerText = data.message || 'Aluno removido com sucesso!';
+                loadStudents();  // Atualiza a lista de alunos
+            })
+            .catch(error => {
+                document.getElementById('message').innerText = 'Erro ao remover o aluno!';
+                console.error('Error:', error);
+            });
+        });
+
+        // Função para remover todos os alunos
+        document.getElementById('remove-all-btn').addEventListener('click', function() {
+            fetch('/remove-all-students', {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('message').innerText = data.message || 'Todos os alunos foram removidos!';
+                loadStudents();  // Atualiza a lista de alunos
+            })
+            .catch(error => {
+                document.getElementById('message').innerText = 'Erro ao remover todos os alunos!';
+                console.error('Error:', error);
+            });
+        });
+
+        // Função para carregar os alunos registrados
+        function loadStudents() {
+            fetch('/get-students')
+            .then(response => response.json())
+            .then(data => {
+                const studentsTableBody = document.querySelector('#students-table tbody');
+                studentsTableBody.innerHTML = '';  // Limpa a tabela antes de adicionar os alunos
+
+                // Adiciona cada aluno à tabela
+                data.forEach(student => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.email}</td>
+                    `;
+                    studentsTableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('message').innerText = 'Erro ao carregar a lista de alunos!';
+            });
+        }
+
+        // Carrega os alunos quando a página for carregada
+        window.onload = loadStudents;
+    </script>
+</body>
+</html>

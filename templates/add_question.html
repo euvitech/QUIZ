@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Pergunta</title>
+</head>
+<body>
+    <h1>Adicionar Pergunta</h1>
+    <form id="add-question-form" method="post">
+        <label for="question">Pergunta:</label>
+        <input type="text" id="question" name="question" required><br>
+
+        <label for="correct_answer">Resposta Correta:</label>
+        <input type="text" id="correct_answer" name="correct_answer" required><br>
+
+        <label for="incorrect_answers">Respostas Incorretas (separadas por vírgula):</label>
+        <input type="text" id="incorrect_answers" name="incorrect_answers" required><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
