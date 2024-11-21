@@ -1,15 +1,19 @@
+/* Importando fonte */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 /* Estilos gerais */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-color: #eef2f7;
     color: #333;
+    line-height: 1.6;
 }
 
 /* Cabeçalho */
 header {
-    background-color: #4caf50;
+    background-color: #5a9ef9;
     color: white;
     padding: 20px;
     text-align: center;
@@ -18,7 +22,9 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Contêiner principal */
@@ -27,55 +33,68 @@ header h1 {
     margin: 20px auto;
     padding: 20px;
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Botões */
 button {
-    background-color: #4caf50;
+    background-color: #5a9ef9;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 1rem;
-    border-radius: 5px;
+    font-weight: bold;
+    border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(90, 158, 249, 0.3);
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #4a8be0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(90, 158, 249, 0.5);
 }
 
 /* Formulários */
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 form input, form textarea, form select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    border-color: #5a9ef9;
+    box-shadow: 0 4px 12px rgba(90, 158, 249, 0.3);
+    outline: none;
 }
 
 form label {
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 5px;
 }
 
 /* Lista de ranking */
 .ranking {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .ranking h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #4caf50;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #5a9ef9;
+    text-transform: uppercase;
 }
 
 .ranking table {
@@ -84,29 +103,30 @@ form label {
 }
 
 .ranking table th, .ranking table td {
-    padding: 10px;
+    padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 .ranking table th {
-    background-color: #4caf50;
+    background-color: #5a9ef9;
     color: white;
+    font-weight: 600;
 }
 
 .ranking table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f7f9fc;
 }
 
 /* Perguntas e Respostas */
 .question {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .question h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #4caf50;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #5a9ef9;
 }
 
 .options {
@@ -115,17 +135,22 @@ form label {
 }
 
 .options li {
-    background: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .options li:hover {
-    background-color: #f1f1f1;
+    background-color: #f0f4fc;
+    transform: translateY(-2px);
 }
 
 .options li.correct {
@@ -142,7 +167,9 @@ form label {
 footer {
     margin-top: 30px;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     font-size: 0.9rem;
     color: #666;
+    background-color: #f7f9fc;
+    border-top: 1px solid #ddd;
 }
