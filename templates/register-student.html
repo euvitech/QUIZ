@@ -3,77 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/register.css">
     <title>Registro de Alunos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-        }
-        button {
-            background-color: #e74c3c;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #c0392b;
-        }
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Registro de Alunos</h1>
+    <div class="container center">
+        <h1 class="title">REGISTRO DE ALUNOS</h1>
         
         <!-- Formulário para registrar aluno -->
-        <form id="register-form">
-            <input type="text" id="name" placeholder="Nome do aluno" required>
-            <input type="email" id="email" placeholder="Email do aluno" required>
-            <button type="submit">Registrar</button>
+        <form id="register-form" class="input-group">
+            <input class="input" type="text" id="name" placeholder="Nome do aluno" required>
+            <input class="input" type="email" id="email" placeholder="Email do aluno" required>
+            <button type="submit" class="button">Registrar</button>
         </form>
-
-        <!-- Botão para remover um aluno específico -->
-        <input type="number" id="student-id" placeholder="ID do aluno para remover">
-        <button id="remove-student-btn">Remover Aluno</button>
-
-        <!-- Botão para remover todos os alunos -->
-        <button id="remove-all-btn">Remover Todos os Alunos</button>
-
+        
+        <div class="input-group">
+            <input class="input" type="number" id="student-id" placeholder="ID do aluno (Remover)">
+            <button id="remove-student-btn" class="button">Remover</button>
+            <!-- Botão para remover todos os alunos -->
+            <button id="remove-all-btn" class="button">Remover Todos</button>
+        </div>
         <div id="message"></div>  <!-- Mensagens de sucesso ou erro -->
 
+
         <!-- Tabela para exibir os alunos -->
-        <h2>Alunos Registrados</h2>
+        <h2 class="title">REGISTRADOS</h2>
         <table id="students-table">
             <thead>
                 <tr>

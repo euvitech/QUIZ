@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  
+:root {
+  --header-height: clamp(4rem, 6vw, 4.8rem);
+
+  --title-color: #212121;
+  --button-color: #1c2e3b;
+  --title-color-dark: #121e27;
+  --text-color: #222e3b;
+  --body-color: #f0f0f0;;
+  --container-color: #fff;
+  --color-text-black: #0e0e0e;
+  --color-comment: #607B96;
+  
+  --body-font: "Poppins", sans-serif;
+
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 800;
+
+  --h1-font-size: 3.6rem;
+  --h2-font-size: 2.4rem;
+  --h3-font-size: 2.0rem;
+  
+  --big-font-size: 4rem;
+  --normal-font-size: 1.6rem;
+  --small-font-size: 1.4rem;
+  --smaller-font-size: 1.3rem;
+  --tiny-font-size: 1.1rem;
+
+  --mb-0-25: .4rem;
+  --mb-0-5: .8rem;
+  --mb-0-75: 1.2rem;
+  --mb-1: 1.6rem;
+  --mb-1-5: 2.4rem;
+  --mb-2: 3.2rem;
+  --mb-2-5: 4rem;
+  --mb-3: 4.8rem;
+
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-size: 65.5%;
+}
+
+body,
+button,
+input,
+textarea {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  margin: 0 auto
+}
+
+h1, h2, h3 {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Reusable css classes */
+
+.title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--mb-0-25);
+    text-align: center;
+    align-items: center;
+    margin: 2rem;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+/* LAYOUT */
+
+.container {
+    max-width: 80%;
+    margin: auto;
+}
+
+.grid {
+  display: grid;
+  gap: 2.4rem;
+}
+
+/* BUTTONS */
+#buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.button {
+  width: 95%;
+  margin: 0 auto;
+  display: inline-block;
+  background-color: var(--button-color);
+  color: var(--container-color);
+  padding: 1.5rem 5rem;
+  margin: 1rem 1rem;
+  border-radius: 1rem;
+  font-weight: var(--font-medium);
+  text-align: center;
+}
+
+.button:hover {
+  background-color: var(--title-color-dark);
+}
+
+.button__icon {
+  margin-left: var(--mb-0-5);
+}
+
+.button--flex {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+
+/* BREAKPOINTS */
+
+/* Responsive typography */
+@media screen and (max-width: 992px) {
+    :root {
+      --big-font-size: 4.4rem;
+      --h1-font-size: 2.4rem;
+      --h2-font-size: 2rem;
+      --h3-font-size: 1.6rem;
+      --normal-font-size: 1.5rem;
+      --small-font-size: 1.3rem;
+      --smaller-font-size: 1.2rem;
+    }
+  
+    .container {
+      margin-left: var(--mb-1-5);
+      margin-right: var(--mb-1-5);
+    }
+  
+    .button {
+      padding: 1.6rem 2.8rem;
+    }
+  
+    .button__icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+  body {
+    margin: 0 0 var(--header-height) 0;
+  }
+
+  .section {
+    padding: 3.2rem 0 6.4rem;
+  }
+
+  .section__subtitle {
+    margin-bottom: var(--mb-3);
+  }
+
+  .container {
+    max-width: 768px;
+    margin-top: auto;
+    margin-bottom: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
+  }
+
+  .title {
+    font-size: 2.7rem;
+    line-height: 3rem;
+
+  }
+
+}
+
+/* For small devices */
+@media screen and (max-width: 425px) {
+    :root {
+      --big-font-size: 3.6rem;
+    }
+  
+    body {
+      font-size: var(--small-font-size);
+    }
+  
+    .container {
+      max-width: 50vw;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .title {
+      font-size: 2rem;
+    }
+  }
+  
+
+@media screen and (max-width: 375px) {
+    :root {
+      --big-font-size: 3.6rem;
+    }
+  
+    body {
+      font-size: var(--tiny-font-size);
+    }
+  
+    .container {
+      max-width: 50vw;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .title {
+      font-size: 1.8rem;
+      line-height: 1.8rem;
+      margin-bottom: 1rem;
+    }
+  }
