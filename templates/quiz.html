@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/quiz.css">
     <title>Quiz</title>
     <script>
         let questions = JSON.parse('{{ questions|tojson }}');
@@ -11,19 +11,22 @@
     </script>
 </head>
 <body>
-    <h1>Quiz</h1>
+    
+    <div class="container center">
+        <h1 class="title">Quiz</h1>
+        <div class="input-group">
+            <label for="student-select">SELECIONE O ALUNO:</label>
+            <select id="student-select" class="input">
+                <option value="">Selecione</option>
+                {% for student in students %}
+                    <option value="{{ student['id'] }}">{{ student['name'] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
 
-    <!-- Seleção de aluno -->
-    <label for="student-select">Selecione o aluno:</label>
-    <select id="student-select">
-        <option value="">Selecione</option>
-        {% for student in students %}
-            <option value="{{ student['id'] }}">{{ student['name'] }}</option>
-        {% endfor %}
-    </select>
-
-    <!-- Container das perguntas -->
-    <div id="quiz-container"></div>
+        <div id="quiz-container"></div>
+    </div>
 
     <script>
         // Lógica para exibir perguntas
@@ -33,7 +36,7 @@
 
         function renderQuestion() {
             if (currentQuestionIndex >= questions.length) {
-                quizContainer.innerHTML = "<p>Fim do quiz!</p>";
+                quizContainer.innerHTML = "<p>FIM DO QUIZ!</p>";
                 return;
             }
 
